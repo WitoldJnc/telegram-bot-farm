@@ -1,0 +1,19 @@
+package ru.dailypron.bot.repo;
+
+import org.jsoup.nodes.Node;
+import org.springframework.stereotype.Service;
+import ru.dailypron.bot.model.DailyEntity;
+
+import java.util.List;
+
+public interface DBUpdateService {
+    List<DailyEntity> createDailyEntities();
+
+    List<String> getTitles(int pageCount, String resouce);
+
+    Boolean connectToResource(String cookie, String resouce);
+
+    List<String> extractTitles(List<Node> nodesWithContent);
+
+    List<Node> extractChildNodes(List<Node> childNodesForFilter);
+}
