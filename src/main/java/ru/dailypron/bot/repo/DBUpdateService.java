@@ -1,13 +1,13 @@
 package ru.dailypron.bot.repo;
 
 import org.jsoup.nodes.Node;
-import org.springframework.stereotype.Service;
 import ru.dailypron.bot.model.DailyEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface DBUpdateService {
-    List<DailyEntity> createDailyEntities();
+    List<DailyEntity> getNewDailyEntities();
 
     List<String> getTitles(int pageCount, String resouce);
 

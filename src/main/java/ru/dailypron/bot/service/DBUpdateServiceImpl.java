@@ -17,6 +17,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -29,15 +30,26 @@ public class DBUpdateServiceImpl implements DBUpdateService {
     @Autowired
     private DailyEntityService dailyEntityService;
 
+
+
     @Override
-    public List<DailyEntity> createDailyEntities() {
+    public List<DailyEntity> getNewDailyEntities() {
         String cookie = env.getProperty("bot.cookie");
         String resource = env.getProperty("bot.resource");
         connectToResource(cookie, resource);
         List<DailyEntity> dailyEntities = new ArrayList<>();
-        List<String> titles = getTitles(15, resource);
+        List<String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("page.count"))), resource);
 
-        titles.forEach(x -> dailyEntities.add(new DailyEntity(x)));
+        Iterable<DailyEntity> allByStatusIsFalse = dailyEntityService.findAllByStatusIsFalse();
+
+        //todo упростить.
+        allByStatusIsFalse.forEach(entity -> {
+            titles.forEach(daily -> {
+                if (!entity.getTitle().equals(daily)) {
+                    dailyEntities.add(new DailyEntity(daily));
+                }
+            });
+        });
 
         return dailyEntities;
     }
@@ -100,9 +112,6 @@ public class DBUpdateServiceImpl implements DBUpdateService {
             return false;
         }
     }
-
-    ;
-
 
 }
 
