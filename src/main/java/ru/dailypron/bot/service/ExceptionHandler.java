@@ -2,7 +2,7 @@ package ru.dailypron.bot.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.dailypron.bot.repo.info.InfoBotService;
+import ru.dailypron.bot.repo.tg.InfoBotService;
 
 @Component
 public class ExceptionHandler implements ru.dailypron.bot.repo.ExceptionHandler {

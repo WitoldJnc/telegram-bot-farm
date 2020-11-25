@@ -1,4 +1,4 @@
-package ru.dailypron.bot.service.info;
+package ru.dailypron.bot.service.tg;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +8,13 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.dailypron.bot.repo.info.InfoBotService;
+import ru.dailypron.bot.repo.tg.InfoBotService;
 
 @Component
 public class InfoBotServiceImpl extends TelegramLongPollingBot implements InfoBotService {
+
     @Autowired
     private Environment env;
-
 
     @Override
     public void onUpdateReceived(Update update) {
