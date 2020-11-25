@@ -37,16 +37,7 @@ public class DBUpdateServiceImpl implements DBUpdateService {
         List<DailyEntity> dailyEntities = new ArrayList<>();
         List<String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("api.page.count"))), resource);
 
-        Iterable<DailyEntity> allByStatusIsFalse = dailyEntityService.findAllByStatusIsFalse();
-
-        //todo упростить.
-        allByStatusIsFalse.forEach(entity -> {
-            titles.forEach(daily -> {
-                if (!entity.getTitle().equals(daily)) {
-                    dailyEntities.add(new DailyEntity(daily));
-                }
-            });
-        });
+        titles.forEach(x -> dailyEntities.add(new DailyEntity(x)));
 
         return dailyEntities;
     }
