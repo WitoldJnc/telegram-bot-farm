@@ -1,5 +1,5 @@
 package ru.dailypron.bot.repo;
 
 public interface ExceptionHandler {
-    public void postToInfo(String cause);
+    String postToInfo(String cause);
 }

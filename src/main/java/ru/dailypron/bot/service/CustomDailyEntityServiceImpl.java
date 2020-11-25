@@ -8,9 +8,7 @@ import ru.dailypron.bot.repo.CustomDailyEntityService;
 import ru.dailypron.bot.repo.DBUpdateService;
 import ru.dailypron.bot.repo.DailyEntityService;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 public class CustomDailyEntityServiceImpl implements CustomDailyEntityService {
@@ -26,16 +24,17 @@ public class CustomDailyEntityServiceImpl implements CustomDailyEntityService {
 
 
     @Override
-    public List<DailyEntity> createNewRecords() {
-        List<DailyEntity> newDailyEntities = dbUpdateService.getNewDailyEntities();
+    public Iterable<DailyEntity> createNewRecords() {
+        Iterable<DailyEntity> newDailyEntities = dbUpdateService.getNewDailyEntities();
         dailyEntityService.saveAll(newDailyEntities);
         return newDailyEntities;
     }
 
     @Override
-    public void changeEntityStatus(DailyEntity entity) {
+    public Optional<DailyEntity> changeEntityStatus(DailyEntity entity) {
         entity.setStatus(true);
         dailyEntityService.save(entity);
+        return Optional.of(entity);
     }
 
     @Override

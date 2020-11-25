@@ -4,7 +4,6 @@ import org.jsoup.nodes.Node;
 import ru.dailypron.bot.model.DailyEntity;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface DBUpdateService {
     List<DailyEntity> getNewDailyEntities();

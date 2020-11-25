@@ -6,7 +6,6 @@ import org.jsoup.nodes.Node;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import ru.dailypron.bot.model.DailyEntity;
 import ru.dailypron.bot.repo.DBUpdateService;
 import ru.dailypron.bot.repo.DailyEntityService;
@@ -17,7 +16,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -31,14 +29,13 @@ public class DBUpdateServiceImpl implements DBUpdateService {
     private DailyEntityService dailyEntityService;
 
 
-
     @Override
     public List<DailyEntity> getNewDailyEntities() {
-        String cookie = env.getProperty("bot.cookie");
-        String resource = env.getProperty("bot.resource");
+        String cookie = env.getProperty("api.bot.cookie");
+        String resource = env.getProperty("api.bot.resource");
         connectToResource(cookie, resource);
         List<DailyEntity> dailyEntities = new ArrayList<>();
-        List<String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("page.count"))), resource);
+        List<String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("api.page.count"))), resource);
 
         Iterable<DailyEntity> allByStatusIsFalse = dailyEntityService.findAllByStatusIsFalse();
 

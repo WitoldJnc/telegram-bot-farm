@@ -24,7 +24,7 @@ public class DBUpdateController {
     }
 
     @GetMapping("/create")
-    public ResponseEntity<List<DailyEntity>> createNewRecords() {
+    public ResponseEntity<Iterable<DailyEntity>> createNewRecords() {
         return ResponseEntity.ok(customDailyEntityService.createNewRecords());
     }
 }
