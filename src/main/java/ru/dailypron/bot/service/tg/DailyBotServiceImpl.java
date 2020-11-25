@@ -45,29 +45,40 @@ public class DailyBotServiceImpl extends TelegramLongPollingBot implements Daily
         Optional<DailyEntity> dailyEntity = Optional.of(customDailyEntityService.findRandom())
                 .map(x -> customDailyEntityService.findRandom())
                 .orElse(customDailyEntityService.findAny());
+
+        String AD = "by @pantyOfDestiny \n\n";
+
         if (update.hasMessage()) {
             if (update.getMessage().hasText()) {
                 if (update.getMessage().getText().equals("/start")) {
                     try {
-                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), dailyEntity.get().getTitle()));
+                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), AD + "find your own guilty pleasure", "start"));
                     } catch (TelegramApiException e) {
                         e.printStackTrace();
+                        exceptionHandler.postToInfo("on init message \n" + e);
+                    }
+                } else {
+                    try {
+                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), AD, "start"));
+                    } catch (TelegramApiException e) {
+                        exceptionHandler.postToInfo("on empty message and send ad \n" + e);
                     }
                 }
             }
         } else if (update.hasCallbackQuery()) {
             try {
-                execute(sendInlineKeyBoardMessage(update.getCallbackQuery().getMessage().getChatId(), dailyEntity.get().getTitle()));
+                execute(sendInlineKeyBoardMessage(update.getCallbackQuery().getMessage().getChatId(), dailyEntity.get().getTitle(), "more"));
             } catch (TelegramApiException e) {
                 e.printStackTrace();
+                exceptionHandler.postToInfo("on get callback by button \n" + e);
             }
         }
     }
 
-    public static SendMessage sendInlineKeyBoardMessage(long chatId, String message) {
+    public static SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
-        inlineKeyboardButton.setText("more");
+        inlineKeyboardButton.setText(capture);
         inlineKeyboardButton.setCallbackData("Button \"more\" has been pressed");
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
         keyboardButtonsRow.add(inlineKeyboardButton);
