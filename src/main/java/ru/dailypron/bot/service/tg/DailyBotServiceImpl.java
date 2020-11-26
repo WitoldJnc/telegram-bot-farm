@@ -59,7 +59,10 @@ public class DailyBotServiceImpl extends TelegramLongPollingBot implements Daily
                     }
                 } else {
                     try {
-                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), AD, "start"));
+                        DailyEntity findEntity = customDailyEntityService.findAllByTitleIlike(update.getMessage().getText())
+                                .orElse(new DailyEntity("Увы, ничего нет " + AD));
+
+                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), findEntity.getTitle(), "start"));
                     } catch (TelegramApiException e) {
                         exceptionHandler.postToInfo("on empty message and send ad \n" + e);
                     }

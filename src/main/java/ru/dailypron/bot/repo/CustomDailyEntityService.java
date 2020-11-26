@@ -14,4 +14,8 @@ public interface CustomDailyEntityService {
     Iterable<DailyEntity> deleteAllEntitiesByStatusIsTrue();
 
     Iterable<DailyEntity> createNewRecords();
+
+    Optional<DailyEntity> findAllByTitleIlike(String title);
+
+
 }
