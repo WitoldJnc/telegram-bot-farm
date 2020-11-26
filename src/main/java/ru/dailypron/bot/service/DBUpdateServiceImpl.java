@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -35,34 +37,34 @@ public class DBUpdateServiceImpl implements DBUpdateService {
         String resource = env.getProperty("api.bot.resource");
         connectToResource(cookie, resource);
         List<DailyEntity> dailyEntities = new ArrayList<>();
-        List<String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("api.page.count"))), resource);
+        Map<String, String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("api.page.count"))), resource);
 
-        titles.forEach(x -> dailyEntities.add(new DailyEntity(x)));
+        titles.forEach((key, value) -> dailyEntities.add(new DailyEntity(key, value)));
 
         return dailyEntities;
     }
 
     @Override
-    public List<String> getTitles(int pageCount, String resource) {
-        List<String> titles = new ArrayList<>();
+    public Map<String, String> getTitles(int pageCount, String resource) {
+        Map<String, String> dailyContent = new HashMap<>();
         try {
 
             for (int p = 1; p < pageCount; p++) {
+                System.out.println(p);
                 Document document = Jsoup.connect(resource + "/video?o=mv&cc=ru&page=" + p).get();
                 List<Node> childNodesForFilter = document.getElementById("videoCategory").childNodes();
                 List<Node> nodesWithContent = extractChildNodes(childNodesForFilter);
-                List<String> titlesPerPage = extractTitles(nodesWithContent);
-                titles.addAll(titlesPerPage);
+                Map<String, String> content = extractTitles(nodesWithContent);
+                dailyContent.putAll(content);
                 Thread.sleep(800);
-                titles.stream().distinct().collect(Collectors.toList());
 
             }
         } catch (IOException | InterruptedException e) {
-            titles = null;
+            dailyContent = new HashMap<>();
             exceptionHandler.postToInfo("on get titles " + e.getMessage());
         }
 
-        return titles;
+        return dailyContent;
     }
 
     public List<Node> extractChildNodes(List<Node> childNodesForFilter) {
@@ -75,16 +77,17 @@ public class DBUpdateServiceImpl implements DBUpdateService {
         return nodesWithContent;
     }
 
-    public List<String> extractTitles(List<Node> nodesWithContent) {
-        List<String> titlesPerPage = new ArrayList<>();
+    public Map<String, String> extractTitles(List<Node> nodesWithContent) {
+        Map<String, String> contentPerPage = new HashMap<>();
         nodesWithContent
                 .forEach(x -> {
                     String content = x.childNode(1).childNode(5).childNode(1).childNode(1).attr("title");
+                    String href = env.getProperty("api.bot.resource") + x.childNode(1).childNode(5).childNode(1).childNode(1).attr("href");
                     if (Pattern.matches(".*\\p{InCyrillic}.*", content)) {
-                        titlesPerPage.add(content);
+                        contentPerPage.put(content, href);
                     }
                 });
-        return titlesPerPage;
+        return contentPerPage;
     }
 
     @Override
