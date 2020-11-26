@@ -1,5 +1,6 @@
 package ru.dailypron.bot.controller;
 
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import ru.dailypron.bot.repo.CustomDailyEntityService;
 import ru.dailypron.bot.repo.DailyEntityService;
 import ru.dailypron.bot.repo.ExceptionHandler;
 
+@Api(value = "Swagger2DemoRestController", description = "force post to tg")
 @RestController
 @RequestMapping("/post")
 public class PostController {
