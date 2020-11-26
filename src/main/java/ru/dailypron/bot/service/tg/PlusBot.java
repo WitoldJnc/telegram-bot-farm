@@ -57,7 +57,10 @@ public class PlusBot extends TelegramLongPollingBot {
                     }
                 } else {
                     try {
-                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), AD, "start", false, null));
+                        DailyEntity findDaily = customDailyEntityService.findAllByTitleIlike(update.getMessage().getText())
+                                .orElse(new DailyEntity("Увы, ничего " + AD));
+
+                        execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), findDaily.getTitle(), "start", false, null));
                     } catch (TelegramApiException e) {
                         exceptionHandler.postToInfo("on empty message and send ad \n" + e);
                     }

@@ -9,6 +9,7 @@ import ru.dailypron.bot.repo.DBUpdateService;
 import ru.dailypron.bot.repo.DailyEntityService;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.Collections;
 import java.util.List;
@@ -70,4 +71,16 @@ public class CustomDailyEntityServiceImpl implements CustomDailyEntityService {
         dailyEntityService.deleteAll(allByStatusIsTrue);
         return allByStatusIsTrue;
     }
+
+    @Override
+    public Optional<DailyEntity> findAllByTitleIlike(String title) {
+        return entityManager.createNativeQuery("SELECT * FROM public.daily_entity de " +
+                "WHERE de.title ILIKE CONCAT('%', :title ,'%') " +
+                "ORDER BY RANDOM()" +
+                "LIMIT 1", DailyEntity.class)
+                .setParameter("title", title)
+                .getResultList().stream().findFirst();
+
+    }
+
 }
