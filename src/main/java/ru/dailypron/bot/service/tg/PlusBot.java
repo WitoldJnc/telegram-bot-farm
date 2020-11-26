@@ -60,7 +60,7 @@ public class PlusBot extends TelegramLongPollingBot {
                         //todo refactoring
                         Optional<DailyEntity> allByTitleIlike = customDailyEntityService.findAllByTitleIlike(update.getMessage().getText());
                         if(!allByTitleIlike.isEmpty()){
-                            execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), allByTitleIlike.get().getTitle() + AD, "start", true, allByTitleIlike.get().getUrl()));
+                            execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), allByTitleIlike.get().getTitle(), "start", true, allByTitleIlike.get().getUrl()));
                         } else {
                             execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), "Увы, ничего нет " + AD, "start", false, null));
                         }
