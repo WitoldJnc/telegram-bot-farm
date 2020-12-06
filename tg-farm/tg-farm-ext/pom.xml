@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>common-parent</artifactId>
+        <groupId>ru.tg-farm</groupId>
+        <version>1.0.0</version>
+        <relativePath>../common/common-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>tg-farm-ext</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <name>tg-farm-ext</name>
+
+    <properties>
+        <properties.searchPath>*/src/main/resources/*.properties</properties.searchPath>
+        <PH_daily_trash.version>1.0.0</PH_daily_trash.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>ru.tg.farm.daily_trash</groupId>
+            <artifactId>PH_daily_trash</artifactId>
+            <version>${PH_daily_trash.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <plugins>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>ru.tg.bot.farm.Main</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

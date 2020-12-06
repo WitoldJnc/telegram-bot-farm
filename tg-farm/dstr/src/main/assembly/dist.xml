@@ -1,0 +1,19 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+    <id>telegram-bot-farm</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <baseDirectory>tg-farm</baseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>../tg-farm-ext/PH_daily_trash/target</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>PH_daily_trash*.jar</include>
+            </includes>
+        </fileSet>
+
+    </fileSets>
+</assembly>
