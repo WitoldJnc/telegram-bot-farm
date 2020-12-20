@@ -1,17 +1,12 @@
 package ru.tg.farm.daily.trash.service.tg;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.tg.farm.common.repository.ExceptionHandler;
 import ru.tg.farm.daily.trash.model.DailyEntity;
-import ru.tg.farm.daily.trash.repo.CustomDailyEntityService;
 import ru.tg.farm.daily.trash.repo.tg.DailyBotService;
 
 import java.util.ArrayList;
@@ -19,16 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class DailyBotServiceImpl extends TelegramLongPollingBot implements DailyBotService {
-
-    @Autowired
-    private Environment env;
-
-    @Autowired
-    private ExceptionHandler exceptionHandler;
-
-    @Autowired
-    private CustomDailyEntityService customDailyEntityService;
+public class DailyBotServiceImpl extends DailyBotSender implements DailyBotService {
 
     @Override
     public String getBotUsername() {
@@ -78,7 +64,8 @@ public class DailyBotServiceImpl extends TelegramLongPollingBot implements Daily
         }
     }
 
-    public static SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture) {
+    @Override
+    public SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton inlineKeyboardButton = new InlineKeyboardButton();
         inlineKeyboardButton.setText(capture);
@@ -94,5 +81,10 @@ public class DailyBotServiceImpl extends TelegramLongPollingBot implements Daily
         sm.setParseMode("HTML");
         sm.setReplyMarkup(inlineKeyboardMarkup);
         return sm;
+    }
+
+    @Override
+    public SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture, Boolean showLink, String url) {
+        return null;
     }
 }

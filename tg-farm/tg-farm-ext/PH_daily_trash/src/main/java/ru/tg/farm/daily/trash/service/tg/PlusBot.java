@@ -3,7 +3,6 @@ package ru.tg.farm.daily.trash.service.tg;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
@@ -18,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class PlusBot extends TelegramLongPollingBot {
+public class PlusBot extends DailyBotSender {
     @Autowired
     private Environment env;
 
@@ -37,6 +36,8 @@ public class PlusBot extends TelegramLongPollingBot {
     public String getBotToken() {
         return String.valueOf(env.getProperty("ph.tg.bot.plus.api.key"));
     }
+
+
 
     @Override
     public void onUpdateReceived(Update update) {
@@ -59,7 +60,7 @@ public class PlusBot extends TelegramLongPollingBot {
                     try {
                         //todo refactoring
                         Optional<DailyEntity> allByTitleIlike = customDailyEntityService.findAllByTitleIlike(update.getMessage().getText());
-                        if(!allByTitleIlike.isEmpty()){
+                        if (allByTitleIlike.isPresent()) {
                             execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), allByTitleIlike.get().getTitle(), "start", true, allByTitleIlike.get().getUrl()));
                         } else {
                             execute(sendInlineKeyBoardMessage(update.getMessage().getChatId(), "Увы, ничего нет " + AD, "start", false, null));
@@ -81,8 +82,13 @@ public class PlusBot extends TelegramLongPollingBot {
         }
     }
 
+    @Override
+    public SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture){
+        return null;
+    }
 
-    public static SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture, Boolean showLink, String url) {
+    @Override
+    public SendMessage sendInlineKeyBoardMessage(long chatId, String message, String capture, Boolean showLink, String url) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
 

@@ -3,4 +3,4 @@ services:
   PH_daily_trash_bot:
     image: ph-daily-trash-bot
     ports:
-      - "48080:8080"
+      - "8080:8080"
