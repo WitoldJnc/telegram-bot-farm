@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import ru.tg.farm.daily.trash.model.DailyEntity;
 import ru.tg.farm.daily.trash.repo.DBUpdateService;
 import ru.tg.farm.daily.trash.repo.DailyEntityService;
-import ru.tg.farn.common.repository.ExceptionHandler;
+import ru.tg.farm.common.repository.ExceptionHandler;
 
 import java.io.IOException;
 import java.net.URL;

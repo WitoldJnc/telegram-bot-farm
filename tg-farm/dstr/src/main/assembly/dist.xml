@@ -15,5 +15,13 @@
             </includes>
         </fileSet>
 
+        <fileSet>
+            <directory>../tg-farm-ext/PD_panty_of_destiny/target</directory>
+            <outputDirectory>./</outputDirectory>
+            <includes>
+                <include>PD_panty_of_destiny*.jar</include>
+            </includes>
+        </fileSet>
+
     </fileSets>
 </assembly>

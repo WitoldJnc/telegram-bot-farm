@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202007091531_create_sign_table" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="horo_sign" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            create table public.horo_sign (
+            id serial primary key,
+            code varchar(50) not null
+            )
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

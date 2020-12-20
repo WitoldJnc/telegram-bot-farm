@@ -10,8 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ru.tg.farm.daily_trash</groupId>
-    <artifactId>PH_daily_trash</artifactId>
+    <groupId>ru.tg.farm.panty_of_destiny</groupId>
+    <artifactId>PD_panty_of_destiny</artifactId>
     <version>1.0.0</version>
     <dependencies>
         <dependency>
@@ -20,6 +20,14 @@
             <version>1.0.0</version>
         </dependency>
 
+        <!--tg api for channel management-->
+        <dependency>
+            <groupId>com.github.pengrad</groupId>
+            <artifactId>java-telegram-bot-api</artifactId>
+            <version>4.9.0</version>
+        </dependency>
+
+        <!--        db and jpa-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -29,14 +37,20 @@
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
+        <!--        migration-->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
-        <finalName>PH_daily_trash</finalName>
+        <finalName>PD_panty_of_destiny</finalName>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <filtering>true</filtering>
             </resource>
         </resources>
         <plugins>
@@ -47,7 +61,7 @@
                 <configuration>
                     <images>
                         <image>
-                            <name>ph-daily-trash-bot</name>
+                            <name>pd-panty-of-destiny-bot</name>
                             <build>
                                 <dockerFileDir>${project.basedir}</dockerFileDir>
                             </build>
@@ -64,11 +78,12 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ru.tg.farm.daily.trash.Main</mainClass>
+                    <mainClass>ru.tg.farm.panty.destiny.Main</mainClass>
                 </configuration>
             </plugin>
 
@@ -90,6 +105,7 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
         </plugins>
     </build>
 </project>

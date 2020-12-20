@@ -19,12 +19,18 @@
     <properties>
         <properties.searchPath>*/src/main/resources/*.properties</properties.searchPath>
         <PH_daily_trash.version>1.0.0</PH_daily_trash.version>
+        <PD_panty_of_destiny.version>1.0.0</PD_panty_of_destiny.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>ru.tg.farm.daily_trash</groupId>
             <artifactId>PH_daily_trash</artifactId>
             <version>${PH_daily_trash.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.tg.farm.panty_of_destiny</groupId>
+            <artifactId>PD_panty_of_destiny</artifactId>
+            <version>${PD_panty_of_destiny.version}</version>
         </dependency>
     </dependencies>
     <build>

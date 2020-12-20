@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202007141036_man_pants_add_time_columnt.xml" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="public" tableName="man_pants"/>
+            <not>
+                <columnExists schemaName="public" tableName="man_pants" columnName="dt"/>
+            </not>
+        </preConditions>
+        <sql>
+            alter table public.man_pants add column dt timestamp;
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007141036_woman_pants_add_time_columnt.xml" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="public" tableName="woman_pants"/>
+            <not>
+                <columnExists schemaName="public" tableName="woman_pants" columnName="dt"/>
+            </not>
+        </preConditions>
+        <sql>
+            alter table public.woman_pants add column dt timestamp;
+        </sql>
+    </changeSet>
+
+    <changeSet id="202007141036_horo_sign_add_time_columnt.xml" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists schemaName="public" tableName="horo_sign"/>
+            <not>
+                <columnExists schemaName="public" tableName="horo_sign" columnName="dt"/>
+            </not>
+        </preConditions>
+        <sql>
+            alter table public.horo_sign add column dt timestamp;
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -9,7 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import ru.tg.farn.common.repository.ExceptionHandler;
+import ru.tg.farm.common.repository.ExceptionHandler;
 import ru.tg.farm.daily.trash.model.DailyEntity;
 import ru.tg.farm.daily.trash.repo.CustomDailyEntityService;
 import ru.tg.farm.daily.trash.repo.tg.DailyBotService;

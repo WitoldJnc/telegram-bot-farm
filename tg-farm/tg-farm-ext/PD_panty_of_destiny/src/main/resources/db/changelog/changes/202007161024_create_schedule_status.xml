@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202007161024_create_schedule_status" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="schedule_status" schemaName="public"/>
+            </not>
+        </preConditions>
+        <sql>
+            create table public.schedule_status (
+            id serial       primary key,
+            code            varchar(150),
+            status          boolean
+            )
+        </sql>
+    </changeSet>
+
+
+    <changeSet id="202007161024_insert_schedule_status" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="schedule_status" schemaName="public"/>
+            <sqlCheck expectedResult="0">select count(*) from public.schedule_status</sqlCheck>
+        </preConditions>
+        <sql>
+            insert into public.schedule_status (code, status) values
+            ('MAN11',     true),
+            ('WOMAN15',   true),
+            ('MANS17',    true),
+            ('RANDOM21',  true),
+            ('WOMANS23',  true);
+        </sql>
+    </changeSet>
+</databaseChangeLog>

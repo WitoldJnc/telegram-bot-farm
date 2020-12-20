@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="202012201707_delete_man_duplicate.xml" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+                <tableExists tableName="man_pants" schemaName="public"/>
+        </preConditions>
+        <sql>
+            delete from public.man_pants where id in (select id from public.man_pants  ou
+            where (select count(*) from public.man_pants inr
+            where inr.url = ou.url) > 1)
+        </sql>
+    </changeSet>
+
+    <changeSet id="202012201708_delete_woman_duplicate.xml" author="tivanov.anton" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="man_pants" schemaName="public"/>
+        </preConditions>
+        <sql>
+            delete from public.woman_pants where id in (select id from public.woman_pants  ou
+            where (select count(*) from public.woman_pants inr
+            where inr.url = ou.url) > 1)
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>
