@@ -1,0 +1,11 @@
+tg:
+  bot:
+    info:
+      api:
+        key: 1405235594:AAFoQz03vGBAgApaPEJ-LUnc3yjC6A1XlSY
+        name: dev_exception_handle_bot
+        chat: 264856200
+
+cloud:
+  postgres:
+    instance: tg-farm-postgres

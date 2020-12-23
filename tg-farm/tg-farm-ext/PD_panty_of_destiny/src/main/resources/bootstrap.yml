@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: ph_daily_trash_bot
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        prefix:
+        defaultContext: ph.daily_trash.bot
