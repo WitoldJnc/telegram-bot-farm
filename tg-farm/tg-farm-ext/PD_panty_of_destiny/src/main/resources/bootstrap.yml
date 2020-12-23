@@ -1,6 +1,6 @@
 spring:
   application:
-    name: ph_daily_trash_bot
+    name: pod_panty_of_destiny_bot
   cloud:
     consul:
       host: localhost
@@ -8,4 +8,4 @@ spring:
       config:
         enabled: true
         prefix:
-        defaultContext: ph.daily_trash.bot
+        defaultContext: ph.panty_of_destiny.bot

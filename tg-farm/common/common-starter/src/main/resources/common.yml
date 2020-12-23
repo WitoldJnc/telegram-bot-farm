@@ -8,4 +8,4 @@ tg:
 
 cloud:
   postgres:
-    instance: tg-farm-postgres
+    instance:

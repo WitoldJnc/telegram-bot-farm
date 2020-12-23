@@ -2,7 +2,6 @@ server:
   port: ${PORT:8081}
 
 spring:
-
   flyway:
     locations: classpath:db/migration/
 #    enabled: ${ENABLE_MIGRATION:true}
@@ -21,6 +20,9 @@ spring:
 #      ddl-auto: create
 #      ddl-auto: update
 
+tg:
+  bot:
+    mnemonic: PH_BT
 
 ph:
   tg:
@@ -33,7 +35,6 @@ ph:
           key: ${TG_BOT_PLUS_KEY:dev_ph_plus_bot:1417700815:AAF5ChPfCe2a2tkC4yitWpKQFpTTwFwn3EA}
           name: ${TG_BOT_PLUS_NAME:@dev_ph_plus_bot}
       setting:
-        mnemonic: PH_BT
         cookie: ${API_BOT_COOKIE}
         resource: ${API_BOT_RESOURCE}
         page:

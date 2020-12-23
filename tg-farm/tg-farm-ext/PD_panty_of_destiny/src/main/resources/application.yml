@@ -1,29 +1,38 @@
-api.bot.mnemonic=PoD
-server.port=${PORT:8080}
+tg:
+  bot:
+    mnemonic: PH_BT
 
-tg.bot.api.key=${telegramBotApiKey}
-tg.bot.api.chat=${telegramBotApiChat}
+server:
+  port: ${PORT:8080}
 
-application.api.key=${applicationKey}
+pod:
+  tg:
+    api:
+      bot:
+        key: ${telegramBotApiKey}
+        chat: ${telegramBotApiChat}
+        secure: ${applicationKey}
 
-#for docker-compose
-db.url=jdbc:postgresql://tg-farm-postgres:5432/postgres
-#for postgre local container
-#db.url=jdbc:postgresql://localhost:5432/postgres
+spring:
+  liquibase:
+    enabled: ${DB_UPDATE:true}
+#    enabled: false
+    change-log: db/changelog/db.changelog-master.xml
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: ${DDL_AUTO:none}
+#      ddl-auto: create
+#      ddl-auto: update
 
-db.username=postgres
-db.password=postgres
 
-spring.datasource.url=${JDBC_DATABASE_URL:${db.url}}
-spring.datasource.username=${JDBC_DATABSE_USERNAME:${db.username}}
-spring.datasource.password=${JDBC_DATABASE_PASSWORD:${db.password}}
-spring.datasource.driver-class-name=org.postgresql.Driver
-
-spring.jpa.show-sql=false
-spring.jpa.hibernate.ddl-auto=${DDL_AUTO:none}
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
-
-spring.liquibase.enabled=${DB_UPDATE:true}
-spring.liquibase.change-log=classpath:db/changelog/db.changelog-master.xml
+cloud:
+  postgres:
+    instance: tg-farm-postgres
 
 

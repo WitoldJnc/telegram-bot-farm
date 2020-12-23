@@ -19,7 +19,7 @@ import static java.lang.String.format;
 
 @Configuration
 @AutoConfigureBefore
-public class PersistenceConfiguration {
+public class DiscoveryDatasourceConfig {
 
     @Value("${db.name}")
     private String databaseName;

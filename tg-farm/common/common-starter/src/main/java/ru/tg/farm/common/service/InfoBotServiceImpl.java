@@ -29,7 +29,7 @@ public class InfoBotServiceImpl extends TelegramLongPollingBot implements InfoBo
     @SneakyThrows
     @Override
     public String sendInfoMessage(String message) {
-        String mnemonic = String.valueOf(env.getProperty("api.bot.mnemonic"));
+        String mnemonic = String.valueOf(env.getProperty("tg.bot.mnemonic"));
         String errorMessage = String.format("<b>%s</b>: %s", mnemonic, message);
         SendMessage sendMessage = new SendMessage(getChatId(), errorMessage);
         sendMessage.setParseMode("HTML");

@@ -1,8 +1,11 @@
-spring.application.name=ph_daily_trash_bot
-
-spring.cloud.consul.host=localhost
-spring.cloud.consul.port=8500
-spring.cloud.consul.config.enabled=true
-spring.cloud.consul.config.prefix=
-spring.cloud.consul.config.defaultContext=ph.daily_trash.bot
-
+spring:
+  application:
+    name: ph_daily_trash_bot
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        prefix:
+        defaultContext: ph.daily_trash.bot

@@ -1,42 +1,37 @@
 version: '3.5'
-networks:
-  lan:
 
 services:
-#  consul:
-#    image: consul:1.1.0
-#    hostname: localhost
-#    networks:
-#      - lan
+  consul:
+    image: consul:1.1.0
+    ports:
+      - 8500:8500
+
+#  PH_daily_trash_bot:
+#    image: ph-daily-trash-bot
+#    container_name: daily_trash_bot
 #    ports:
-#      - 8500:8500
-##
-  PH_daily_trash_bot:
-    image: ph-daily-trash-bot
-    container_name: daily_trash_bot
-    ports:
-      - "8081:8080"
-    build:
-      context: .
-    depends_on:
-      - tg-farm-postgres
+#      - "8081:8080"
+#    build:
+#      context: .
+#    depends_on:
+#      - tg-farm-postgres
 
-  PD_panty_of_destiny_bot:
-    image: pd-panty-of-destiny-bot
-    container_name: panty_of_destiny_bot
-    ports:
-    - "8080:8080"
-    build:
-      context: .
-    depends_on:
-      - tg-farm-postgres
+#  PD_panty_of_destiny_bot:
+#    image: pd-panty-of-destiny-bot
+#    container_name: panty_of_destiny_bot
+#    ports:
+#    - "8080:8080"
+#    build:
+#      context: .
+#    depends_on:
+#      - tg-farm-postgres
 
-  tg-farm-postgres:
-    image: postgres:10-alpine
-    container_name: tg-farm-postgres
-    hostname: localhost
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: postgres
+#  tg-farm-postgres:
+#    image: postgres:10-alpine
+#    container_name: tg-farm-postgres
+#    hostname: localhost
+#    ports:
+#      - "5432:5432"
+#    environment:
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: postgres

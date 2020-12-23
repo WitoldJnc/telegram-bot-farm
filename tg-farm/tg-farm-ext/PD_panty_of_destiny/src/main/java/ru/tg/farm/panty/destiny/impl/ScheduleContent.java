@@ -12,7 +12,7 @@ import static ru.tg.farm.panty.destiny.model.ScheduleStatuses.*;
 
 @Component
 @EnableScheduling
-@PropertySource("application.properties")
+@PropertySource("application.yml")
 public class ScheduleContent {
     @Autowired
     private ContentSender contentSender;
