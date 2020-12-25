@@ -93,11 +93,11 @@ public class ContentSendeerImpl implements ContentSender {
 
     private void send(String pantsPhotoUrl, String caption) {
         try {
-            TelegramBot bot = new TelegramBot(env.getProperty("tg.bot.api.key"));
+            TelegramBot bot = new TelegramBot(env.getProperty("pod.tg.api.bot.key"));
 
             File file = new File(pantsPhotoUrl);
 
-            SendPhoto photo = new SendPhoto(env.getProperty("tg.bot.api.chat"), file)
+            SendPhoto photo = new SendPhoto(env.getProperty("pod.tg.api.bot.chat"), file)
                     .caption(caption)
                     .parseMode(ParseMode.HTML);
 

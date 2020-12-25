@@ -1,6 +1,43 @@
-version: '2'
+version: '3.5'
+
 services:
-  PH_daily_trash_bot:
-    image: ph-daily-trash-bot
+  consul:
+    image: consul:1.1.0
     ports:
-      - "8080:8080"
+      - 8500:8500
+    volumes:
+    - ./consul/services.json:/consul/config/services.json
+
+  tg-farm-postgres:
+    image: postgres:10-alpine
+    container_name: tg-farm-postgres
+    hostname: localhost
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    depends_on:
+      - consul
+
+  ph-daily-trash-bot:
+    image: ph-daily-trash-bot
+    container_name: ph-daily-trash-bot
+    hostname: localhost
+    restart: on-failure
+    ports:
+      - "8081:8080"
+    depends_on:
+      - tg-farm-postgres
+      - consul
+
+#  PD_panty_of_destiny_bot:
+#    image: pd-panty-of-destiny-bot
+#    container_name: panty_of_destiny_bot
+#    ports:
+#    - "8080:8080"
+#    build:
+#      context: .
+#    depends_on:
+#      - tg-farm-postgres
+

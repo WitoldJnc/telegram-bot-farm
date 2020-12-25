@@ -1,0 +1,16 @@
+spring:
+  application:
+    name:
+  cloud:
+    consul:
+      host:
+      port:
+      config:
+        enabled:
+        prefix:
+        defaultContext:
+      discovery:
+        register:
+        healthCheckPath:
+        healthCheckInterval:
+        tags:

@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: pod_panty_of_destiny_bot
+  cloud:
+    consul:
+      #      host: consul
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        prefix:
+        defaultContext: ph.panty_of_destiny.bot
+      discovery:
+        register: true
+        healthCheckPath: ${management.server.servlet.context-path}/health
+        healthCheckInterval: 15s
+        tags: bot, panty_of_destiny
+
+management:
+  server:
+    servlet:
+      context-path: /common

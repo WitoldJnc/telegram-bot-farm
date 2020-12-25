@@ -1,0 +1,23 @@
+{
+  "services": [
+    {
+      "id": "tg-farm-postgres",
+      "name": "tg-farm-postgres",
+      "tags": [
+        "tg-farm-postgres"
+      ],
+      "address": "localhost",
+      "port": 5433,
+      "check": {
+        "id": "tg-farm-postgres",
+        "name": "PostgreSQL TCP on port 5432",
+        "interval": "600s",
+        "tcp": "tg-farm-postgres:5432",
+        "timeout": "1s",
+        "status": "passing"
+      }
+    }
+  ]
+}
+
+

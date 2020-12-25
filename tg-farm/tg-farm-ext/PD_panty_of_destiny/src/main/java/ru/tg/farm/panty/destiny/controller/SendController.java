@@ -33,7 +33,7 @@ public class SendController {
 
     @GetMapping("/random/{key}")
     public void sendRandom(@PathVariable("key") String key) {
-        if (!env.getProperty("application.api.key").equals(key)) {
+        if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
         scheduledContent.sendRandomContent();
@@ -41,7 +41,7 @@ public class SendController {
 
     @GetMapping("/man/{key}")
     public void sendMan(@PathVariable("key") String key) {
-        if (!env.getProperty("application.api.key").equals(key)) {
+        if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
         scheduledContent.sendManContent();
@@ -49,7 +49,7 @@ public class SendController {
 
     @GetMapping("/woman/{key}")
     public void sendWoman(@PathVariable("key") String key) {
-        if (!env.getProperty("application.api.key").equals(key)) {
+        if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
         scheduledContent.sendWomanContent();
@@ -57,7 +57,7 @@ public class SendController {
 
     @GetMapping("/womans/{key}")
     public void sendWomanShiza(@PathVariable("key") String key) {
-        if (!env.getProperty("application.api.key").equals(key)) {
+        if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
         scheduledContent.sendWomanShiza();
@@ -65,7 +65,7 @@ public class SendController {
 
     @GetMapping("/mans/{key}")
     public void sendManShiza(@PathVariable("key") String key) {
-        if (!env.getProperty("application.api.key").equals(key)) {
+        if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
         scheduledContent.sendManShiza();

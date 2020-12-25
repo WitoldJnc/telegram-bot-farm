@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: ph_daily_trash_bot
+  cloud:
+    consul:
+#      host: consul
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        prefix:
+        defaultContext: ph.daily_trash.bot
+      discovery:
+        register: true
+        healthCheckPath: ${management.server.servlet.context-path}/health
+        healthCheckInterval: 15s
+        tags: bot, daily_trash
+
+management:
+  server:
+    servlet:
+      context-path: /common

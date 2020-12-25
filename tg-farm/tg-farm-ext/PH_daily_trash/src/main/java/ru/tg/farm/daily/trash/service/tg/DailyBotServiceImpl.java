@@ -18,12 +18,12 @@ public class DailyBotServiceImpl extends DailyBotSender implements DailyBotServi
 
     @Override
     public String getBotUsername() {
-        return String.valueOf(env.getProperty("ph.tg.bot.prod.api.name"));
+        return String.valueOf(env.getProperty("ph.tg.api.bot.prod.name"));
     }
 
     @Override
     public String getBotToken() {
-        return String.valueOf(env.getProperty("ph.tg.bot.prod.api.key"));
+        return String.valueOf(env.getProperty("ph.tg.api.bot.prod.key"));
     }
 
     @Override

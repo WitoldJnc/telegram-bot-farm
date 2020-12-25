@@ -32,11 +32,11 @@ public class DBUpdateServiceImpl implements DBUpdateService {
 
     @Override
     public List<DailyEntity> getNewDailyEntities() {
-        String cookie = env.getProperty("api.bot.cookie");
-        String resource = env.getProperty("api.bot.resource");
+        String cookie = env.getProperty("ph.tg.api.setting.cookie");
+        String resource = env.getProperty("ph.tg.api.setting.resource");
         connectToResource(cookie, resource);
         List<DailyEntity> dailyEntities = new ArrayList<>();
-        Map<String, String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("api.page.count"))), resource);
+        Map<String, String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("ph.tg.api.setting.page.count"))), resource);
 
         titles.forEach((key, value) -> dailyEntities.add(new DailyEntity(key, value)));
 
