@@ -9,3 +9,8 @@ spring:
         enabled:
         prefix:
         defaultContext:
+      discovery:
+        register:
+        healthCheckPath:
+        healthCheckInterval:
+        tags:

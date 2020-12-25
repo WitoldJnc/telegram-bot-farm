@@ -1,5 +1,6 @@
-server:
-  port: ${PORT:8081}
+tg:
+  bot:
+    mnemonic: PH_BT
 
 spring:
   flyway:
@@ -20,9 +21,7 @@ spring:
 #      ddl-auto: create
 #      ddl-auto: update
 
-tg:
-  bot:
-    mnemonic: PH_BT
+
 
 ph:
   tg:

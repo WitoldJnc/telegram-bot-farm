@@ -2,9 +2,6 @@ tg:
   bot:
     mnemonic: PH_BT
 
-server:
-  port: ${PORT:8080}
-
 pod:
   tg:
     api:
