@@ -10,10 +10,11 @@ pod:
         chat: ${telegramBotApiChat}
         secure: ${applicationKey}
 
+POD_TG_API_BOT_
+
 spring:
   liquibase:
-    enabled: ${DB_UPDATE:true}
-#    enabled: false
+    enabled: false
     change-log: db/changelog/db.changelog-master.xml
   jpa:
     show-sql: false
@@ -23,7 +24,7 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     hibernate:
-      ddl-auto: ${DDL_AUTO:none}
+      ddl-auto: none
 #      ddl-auto: create
 #      ddl-auto: update
 
