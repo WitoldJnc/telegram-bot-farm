@@ -3,7 +3,6 @@ spring:
     name: ph_daily_trash_bot
   cloud:
     consul:
-      #      host: consul
       host: localhost
       port: 8500
       config:
