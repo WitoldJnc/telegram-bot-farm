@@ -14,3 +14,16 @@ spring:
         healthCheckPath:
         healthCheckInterval:
         tags:
+  kafka:
+    consumer:
+      bootstrap-servers:
+      group-id:
+      auto-offset-reset:
+      key-deserializer:
+      value-deserializer:
+    producer:
+      topic:
+      id:
+      bootstrap-servers:
+      key-serializer:
+      value-serializer:

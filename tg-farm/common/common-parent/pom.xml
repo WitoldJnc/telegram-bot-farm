@@ -94,6 +94,13 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>${springboot.version}</version>
         </dependency>
+
+<!--        kafka-->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>

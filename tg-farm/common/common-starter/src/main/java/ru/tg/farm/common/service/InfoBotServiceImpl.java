@@ -10,6 +10,7 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import ru.tg.farm.common.repository.InfoBotService;
 
+@Deprecated
 @Component
 public class InfoBotServiceImpl extends TelegramLongPollingBot implements InfoBotService {
 

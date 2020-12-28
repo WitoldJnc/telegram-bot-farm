@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.tg.farm.common.repository.InfoBotService;
 
+@Deprecated
 @Component()
 public class ExceptionHandler implements ru.tg.farm.common.repository.ExceptionHandler {
 

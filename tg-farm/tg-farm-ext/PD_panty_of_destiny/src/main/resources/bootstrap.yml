@@ -3,7 +3,6 @@ spring:
     name: pod_panty_of_destiny_bot
   cloud:
     consul:
-      #      host: consul
       host: localhost
       port: 8500
       config:
@@ -15,6 +14,25 @@ spring:
         healthCheckPath: ${management.server.servlet.context-path}/health
         healthCheckInterval: 15s
         tags: bot, panty_of_destiny
+
+    kafka:
+      consumer:
+        bootstrap-servers: localhost:9092
+        group-id: bot
+        auto-offset-reset: earliest
+        key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      producer:
+        topic: ${kafka.log.topic}
+        id: panty_of_destiny
+        bootstrap-servers: localhost:9092
+        key-serializer: org.apache.kafka.common.serialization.StringSerializer
+        value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+kafka:
+  log:
+    topic: farm-info
+
 
 management:
   server:

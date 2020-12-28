@@ -5,7 +5,6 @@ tg:
 spring:
   flyway:
     locations: classpath:db/migration/
-#    enabled: ${ENABLE_MIGRATION:true}
     enabled: false
     baselineOnMigrate: true
 
@@ -17,10 +16,9 @@ spring:
         temp:
           use_jdbc_metadata_defaults: false
     hibernate:
-      ddl-auto: ${DDL_AUTO:none}
+      ddl-auto: none
 #      ddl-auto: create
 #      ddl-auto: update
-
 
 
 ph:

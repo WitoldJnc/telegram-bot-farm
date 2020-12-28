@@ -16,6 +16,42 @@
         "timeout": "1s",
         "status": "passing"
       }
+    },
+    {
+      "id": "tg-farm-kafka",
+      "name": "tg-farm-kafka",
+      "tags": [
+        "tg-farm-kafka",
+        "tg-farm-zookeeper"
+      ],
+      "address": "localhost",
+      "port": 9092,
+      "check": {
+        "id": "tg-farm-kafka",
+        "name": "Kafka TCP on port 9092",
+        "interval": "600s",
+        "tcp": "kafka:9092",
+        "timeout": "1s",
+        "status": "passing"
+      }
+    },
+    {
+      "id": "tg-farm-zookeeper",
+      "name": "tg-farm-zookeeper",
+      "tags": [
+        "tg-farm-kafka",
+        "tg-farm-zookeeper"
+      ],
+      "address": "localhost",
+      "port": 2181,
+      "check": {
+        "id": "tg-farm-zookeeper",
+        "name": "Zookeeper TCP on port 2181",
+        "interval": "600s",
+        "tcp": "zookeeper:2181",
+        "timeout": "1s",
+        "status": "passing"
+      }
     }
   ]
 }
