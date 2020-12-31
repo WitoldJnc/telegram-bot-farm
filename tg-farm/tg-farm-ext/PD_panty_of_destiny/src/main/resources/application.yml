@@ -10,7 +10,6 @@ pod:
         chat: ${telegramBotApiChat}
         secure: ${applicationKey}
 
-POD_TG_API_BOT_
 
 spring:
   liquibase:

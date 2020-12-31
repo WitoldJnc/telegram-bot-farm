@@ -1,13 +1,15 @@
 package ru.tg.farm.panty.destiny.service;
 
+import ru.tg.farm.common.exception.ApiExcetionNeedToLog;
+
 public interface ContentSender {
-    void sendManContent();
+    void sendManContent() throws ApiExcetionNeedToLog;
 
-    void sendWomanContent();
+    void sendWomanContent() throws ApiExcetionNeedToLog;
 
-    void sendManShiza();
+    void sendManWeird() throws ApiExcetionNeedToLog;
 
-    void sendWomanShiza();
+    void sendWomanWeird() throws ApiExcetionNeedToLog;
 
-    void sendRandomContent();
+    void sendRandomContent() throws ApiExcetionNeedToLog;
 }
