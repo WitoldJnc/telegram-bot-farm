@@ -7,11 +7,11 @@
         "tg-farm-postgres"
       ],
       "address": "localhost",
-      "port": 5433,
+      "port": 5432,
       "check": {
         "id": "tg-farm-postgres",
         "name": "PostgreSQL TCP on port 5432",
-        "interval": "600s",
+        "interval": "10s",
         "tcp": "tg-farm-postgres:5432",
         "timeout": "1s",
         "status": "passing"

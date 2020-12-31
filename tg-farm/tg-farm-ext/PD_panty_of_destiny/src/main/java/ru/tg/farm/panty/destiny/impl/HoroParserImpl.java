@@ -1,6 +1,5 @@
 package ru.tg.farm.panty.destiny.impl;
 
-import ru.tg.farm.common.repository.ExceptionHandler;
 import ru.tg.farm.panty.destiny.model.Sign;
 import ru.tg.farm.panty.destiny.pool.HoroPool;
 import ru.tg.farm.panty.destiny.service.HoroParser;

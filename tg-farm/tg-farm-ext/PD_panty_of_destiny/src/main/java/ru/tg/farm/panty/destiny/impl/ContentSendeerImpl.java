@@ -1,6 +1,5 @@
 package ru.tg.farm.panty.destiny.impl;
 
-import ru.tg.farm.common.repository.ExceptionHandler;
 import ru.tg.farm.panty.destiny.model.ManPants;
 import ru.tg.farm.panty.destiny.model.WomanPants;
 import ru.tg.farm.panty.destiny.service.ContentSender;
