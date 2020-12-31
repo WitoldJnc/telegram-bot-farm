@@ -1,5 +1,6 @@
 package ru.tg.farm.panty.destiny.controller;
 
+import ru.tg.farm.common.exception.ApiExcetionNeedToLog;
 import ru.tg.farm.panty.destiny.model.ScheduleStatus;
 import ru.tg.farm.panty.destiny.service.ContentSender;
 import ru.tg.farm.panty.destiny.service.InfoService;
@@ -32,7 +33,7 @@ public class SendController {
     }
 
     @GetMapping("/random/{key}")
-    public void sendRandom(@PathVariable("key") String key) {
+    public void sendRandom(@PathVariable("key") String key) throws ApiExcetionNeedToLog {
         if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
@@ -40,7 +41,7 @@ public class SendController {
     }
 
     @GetMapping("/man/{key}")
-    public void sendMan(@PathVariable("key") String key) {
+    public void sendMan(@PathVariable("key") String key) throws ApiExcetionNeedToLog {
         if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
@@ -48,7 +49,7 @@ public class SendController {
     }
 
     @GetMapping("/woman/{key}")
-    public void sendWoman(@PathVariable("key") String key) {
+    public void sendWoman(@PathVariable("key") String key) throws ApiExcetionNeedToLog {
         if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
@@ -56,19 +57,19 @@ public class SendController {
     }
 
     @GetMapping("/womans/{key}")
-    public void sendWomanShiza(@PathVariable("key") String key) {
+    public void sendWomanShiza(@PathVariable("key") String key) throws ApiExcetionNeedToLog {
         if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
-        scheduledContent.sendWomanShiza();
+        scheduledContent.sendWomanWeird();
     }
 
     @GetMapping("/mans/{key}")
-    public void sendManShiza(@PathVariable("key") String key) {
+    public void sendManShiza(@PathVariable("key") String key) throws ApiExcetionNeedToLog {
         if (!env.getProperty("pod.tg.api.bot.secure").equals(key)) {
             return;
         }
-        scheduledContent.sendManShiza();
+        scheduledContent.sendManWeird();
     }
 
     //todo after tests replace to post

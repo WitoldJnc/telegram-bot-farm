@@ -1,12 +1,5 @@
 package ru.tg.farm.panty.destiny.impl;
 
-import ru.tg.farm.common.repository.ExceptionHandler;
-import ru.tg.farm.panty.destiny.model.ManPants;
-import ru.tg.farm.panty.destiny.model.WomanPants;
-import ru.tg.farm.panty.destiny.service.ContentSender;
-import ru.tg.farm.panty.destiny.service.HoroParser;
-import ru.tg.farm.panty.destiny.service.ImageWriter;
-import ru.tg.farm.panty.destiny.service.PantsService;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendPhoto;
@@ -14,6 +7,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import ru.tg.farm.common.exception.ApiExcetionNeedToLog;
+import ru.tg.farm.panty.destiny.model.ManPants;
+import ru.tg.farm.panty.destiny.model.WomanPants;
+import ru.tg.farm.panty.destiny.service.ContentSender;
+import ru.tg.farm.panty.destiny.service.HoroParser;
+import ru.tg.farm.panty.destiny.service.ImageWriter;
+import ru.tg.farm.panty.destiny.service.PantsService;
 
 import java.io.File;
 import java.util.Random;
@@ -29,51 +29,60 @@ public class ContentSendeerImpl implements ContentSender {
     private ImageWriter imageWriter;
     @Autowired
     private PantsService pantsService;
-    @Autowired
-    private ExceptionHandler handler;
 
     @Override
-    public void sendManContent() {
+    public void sendManContent() throws ApiExcetionNeedToLog {
         try {
             final ManPants randomManPant = pantsService.getRandomManPant();
             send(imageWriter.write(randomManPant.getUrl()),
                     horoParser.getHoro());
             pantsService.changeManPantUsing(randomManPant.getId());
-        }catch (Exception e){
-            log.error(e.toString());
-            handler.postToInfo(e.toString());
+        } catch (Exception e) {
+            throw new ApiExcetionNeedToLog("on send man content " + e.toString());
         }
 
     }
 
     @Override
-    public void sendWomanContent() {
-        final WomanPants randomWomanPant = pantsService.getRandomWomanPant();
-        send(imageWriter.write(randomWomanPant.getUrl()),
-                horoParser.getHoro());
-        pantsService.changeWomanPantUsing(randomWomanPant.getId());
+    public void sendWomanContent() throws ApiExcetionNeedToLog {
+        try {
+            final WomanPants randomWomanPant = pantsService.getRandomWomanPant();
+            send(imageWriter.write(randomWomanPant.getUrl()),
+                    horoParser.getHoro());
+            pantsService.changeWomanPantUsing(randomWomanPant.getId());
+        } catch (Exception e) {
+            throw new ApiExcetionNeedToLog("on send woman content " + e.toString());
+        }
     }
 
     @Override
-    public void sendManShiza() {
-        final ManPants randomManPant = pantsService.getRandomManPant();
-        send(imageWriter.write(randomManPant.getUrl()),
-                horoParser.getShiza());
-        pantsService.changeManPantUsing(randomManPant.getId());
+    public void sendManWeird() throws ApiExcetionNeedToLog {
+        try {
+            final ManPants randomManPant = pantsService.getRandomManPant();
+            send(imageWriter.write(randomManPant.getUrl()),
+                    horoParser.getShiza());
+            pantsService.changeManPantUsing(randomManPant.getId());
+        } catch (Exception e) {
+            throw new ApiExcetionNeedToLog("on send random man content " + e.toString());
+        }
 
     }
 
     @Override
-    public void sendWomanShiza() {
-        final WomanPants randomWomanPant = pantsService.getRandomWomanPant();
+    public void sendWomanWeird() throws ApiExcetionNeedToLog {
+        try {
+            final WomanPants randomWomanPant = pantsService.getRandomWomanPant();
 
-        send(imageWriter.write(randomWomanPant.getUrl()),
-                horoParser.getShiza());
-        pantsService.changeWomanPantUsing(randomWomanPant.getId());
+            send(imageWriter.write(randomWomanPant.getUrl()),
+                    horoParser.getShiza());
+            pantsService.changeWomanPantUsing(randomWomanPant.getId());
+        } catch (Exception e) {
+            throw new ApiExcetionNeedToLog("on send random woman content " + e.toString());
+        }
     }
 
     @Override
-    public void sendRandomContent() {
+    public void sendRandomContent() throws ApiExcetionNeedToLog {
         final WomanPants randomWomanPant = pantsService.getRandomWomanPant();
         final ManPants randomManPant = pantsService.getRandomManPant();
         String content = "";
@@ -91,7 +100,7 @@ public class ContentSendeerImpl implements ContentSender {
                 : horoParser.getHoro());
     }
 
-    private void send(String pantsPhotoUrl, String caption) {
+    private void send(String pantsPhotoUrl, String caption) throws ApiExcetionNeedToLog {
         try {
             TelegramBot bot = new TelegramBot(env.getProperty("pod.tg.api.bot.key"));
 
@@ -103,8 +112,7 @@ public class ContentSendeerImpl implements ContentSender {
 
             bot.execute(photo);
         } catch (Exception e) {
-            handler.postToInfo(e.getMessage());
-            log.error(e.toString());
+            throw new ApiExcetionNeedToLog("on send pant " + e.toString());
         }
     }
 

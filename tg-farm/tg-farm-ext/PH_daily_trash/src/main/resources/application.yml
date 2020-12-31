@@ -26,11 +26,11 @@ ph:
     api:
       bot:
         prod:
-          key: ${TG_BOT_PROD_KEY:1439651637:AAGjZOTxQaI8zaNIdQgpcYxsLVzM5GaqqgM}
+          key: ${TG_BOT_PROD_KEY}
           name: ${TG_BOT_PROD_NAME:@dev_ph_prod_bot}
         plus:
-          key: ${TG_BOT_PLUS_KEY:dev_ph_plus_bot:1417700815:AAF5ChPfCe2a2tkC4yitWpKQFpTTwFwn3EA}
-          name: ${TG_BOT_PLUS_NAME:@dev_ph_plus_bot}
+          key: ${TG_BOT_PLUS_KEYA}
+          name: ${TG_BOT_PLUS_NAME}
       setting:
         cookie: ${API_BOT_COOKIE}
         resource: ${API_BOT_RESOURCE}
