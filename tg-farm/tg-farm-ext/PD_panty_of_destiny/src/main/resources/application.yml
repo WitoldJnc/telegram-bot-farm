@@ -1,0 +1,35 @@
+tg:
+  bot:
+    mnemonic: PH_BT
+
+pod:
+  tg:
+    api:
+      bot:
+        key: ${telegramBotApiKey}
+        chat: ${telegramBotApiChat}
+        secure: ${applicationKey}
+
+
+spring:
+  liquibase:
+    enabled: false
+    change-log: db/changelog/db.changelog-master.xml
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: none
+#      ddl-auto: create
+#      ddl-auto: update
+
+
+cloud:
+  postgres:
+    instance: tg-farm-postgres
+
+

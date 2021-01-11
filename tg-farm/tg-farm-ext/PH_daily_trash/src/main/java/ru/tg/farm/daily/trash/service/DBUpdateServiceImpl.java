@@ -1,15 +1,16 @@
 package ru.tg.farm.daily.trash.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Node;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import ru.tg.farm.common.exception.ApiExcetionNeedToLog;
 import ru.tg.farm.daily.trash.model.DailyEntity;
 import ru.tg.farm.daily.trash.repo.DBUpdateService;
 import ru.tg.farm.daily.trash.repo.DailyEntityService;
-import ru.tg.farm.common.repository.ExceptionHandler;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,22 +22,29 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 @Component
+@Slf4j
 public class DBUpdateServiceImpl implements DBUpdateService {
-    @Autowired
-    private Environment env;
-    @Autowired
-    private ExceptionHandler exceptionHandler;
+
+    @Value("${ph.tg.api.setting.page.count}")
+    String pageCount;
+
+    @Value("${ph.tg.api.setting.cookie}")
+    String cookie;
+
+    @Value("${ph.tg.api.setting.resource}")
+    String resource;
+
     @Autowired
     private DailyEntityService dailyEntityService;
 
 
     @Override
-    public List<DailyEntity> getNewDailyEntities() {
-        String cookie = env.getProperty("api.bot.cookie");
-        String resource = env.getProperty("api.bot.resource");
+    public List<DailyEntity> getNewDailyEntities() throws ApiExcetionNeedToLog {
+        String cookie = this.cookie;
+        String resource = this.resource;
         connectToResource(cookie, resource);
         List<DailyEntity> dailyEntities = new ArrayList<>();
-        Map<String, String> titles = getTitles(Integer.parseInt(String.valueOf(env.getProperty("api.page.count"))), resource);
+        Map<String, String> titles = getTitles(Integer.parseInt(pageCount), resource);
 
         titles.forEach((key, value) -> dailyEntities.add(new DailyEntity(key, value)));
 
@@ -44,12 +52,11 @@ public class DBUpdateServiceImpl implements DBUpdateService {
     }
 
     @Override
-    public Map<String, String> getTitles(int pageCount, String resource) {
+    public Map<String, String> getTitles(int pageCount, String resource) throws ApiExcetionNeedToLog {
         Map<String, String> dailyContent = new HashMap<>();
         try {
 
             for (int p = 1; p < pageCount; p++) {
-                System.out.println(p);
                 Document document = Jsoup.connect(resource + "/video?o=mv&cc=ru&page=" + p).get();
                 List<Node> childNodesForFilter = document.getElementById("videoCategory").childNodes();
                 List<Node> nodesWithContent = extractChildNodes(childNodesForFilter);
@@ -60,7 +67,7 @@ public class DBUpdateServiceImpl implements DBUpdateService {
             }
         } catch (IOException | InterruptedException e) {
             dailyContent = new HashMap<>();
-            exceptionHandler.postToInfo("on get titles " + e.getMessage());
+            throw new ApiExcetionNeedToLog("on get titles " + e.toString());
         }
 
         return dailyContent;
@@ -81,7 +88,7 @@ public class DBUpdateServiceImpl implements DBUpdateService {
         nodesWithContent
                 .forEach(x -> {
                     String content = x.childNode(1).childNode(5).childNode(1).childNode(1).attr("title");
-                    String href = env.getProperty("api.bot.resource") + x.childNode(1).childNode(5).childNode(1).childNode(1).attr("href");
+                    String href = this.resource + x.childNode(1).childNode(5).childNode(1).childNode(1).attr("href");
                     if (Pattern.matches(".*\\p{InCyrillic}.*", content)) {
                         contentPerPage.put(content, href);
                     }
@@ -98,7 +105,6 @@ public class DBUpdateServiceImpl implements DBUpdateService {
             conn.connect();
             return true;
         } catch (Exception e) {
-            exceptionHandler.postToInfo("cant connect to resource");
             return false;
         }
     }

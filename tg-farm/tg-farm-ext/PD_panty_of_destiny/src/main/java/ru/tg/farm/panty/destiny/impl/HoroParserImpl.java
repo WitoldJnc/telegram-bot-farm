@@ -1,6 +1,5 @@
 package ru.tg.farm.panty.destiny.impl;
 
-import ru.tg.farm.common.repository.ExceptionHandler;
 import ru.tg.farm.panty.destiny.model.Sign;
 import ru.tg.farm.panty.destiny.pool.HoroPool;
 import ru.tg.farm.panty.destiny.service.HoroParser;
@@ -27,8 +26,6 @@ public class HoroParserImpl implements HoroParser {
     private HoroPool horoPool;
     @Autowired
     private HoroSignService horoSignService;
-    @Autowired
-    private ExceptionHandler handler;
 
     private List<String> exc = new ArrayList<>();
 
@@ -75,7 +72,6 @@ public class HoroParserImpl implements HoroParser {
         String fourElWithoutThirdSent = fourElWitoutTwiceSent.replace(getFirstSent(fourElWitoutTwiceSent), "").trim();
         String fourSentOfFourEl = getFirstSent(fourElWithoutThirdSent);
 
-
         sb
                 .append(twiceSentOfTwiceEl).append(" ")
                 .append(fourSentOfFourEl).append(" ")
@@ -106,7 +102,6 @@ public class HoroParserImpl implements HoroParser {
             }
             return content;
         } catch (Exception e) {
-            handler.postToInfo(e.getMessage());
             log.error(e.toString());
             exc.add(e.toString());
             return getHoro();

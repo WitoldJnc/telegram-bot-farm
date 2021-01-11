@@ -3,6 +3,7 @@ package ru.tg.farm.daily.trash.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import ru.tg.farm.common.exception.ApiExcetionNeedToLog;
 import ru.tg.farm.daily.trash.repo.CustomDailyEntityService;
 import ru.tg.farm.daily.trash.repo.DBUpdateService;
 import ru.tg.farm.daily.trash.repo.DailyEntityService;
@@ -32,9 +33,8 @@ public class CustomDailyEntityServiceImpl implements CustomDailyEntityService {
     @PersistenceContext
     public EntityManager entityManager;
 
-
     @Override
-    public Iterable<DailyEntity> createNewRecords() {
+    public Iterable<DailyEntity> createNewRecords() throws ApiExcetionNeedToLog {
         Iterable<DailyEntity> newDailyEntities = dbUpdateService.getNewDailyEntities();
         dailyEntityService.saveAll(newDailyEntities);
         return newDailyEntities;

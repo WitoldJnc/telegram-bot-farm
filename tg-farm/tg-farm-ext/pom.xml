@@ -17,7 +17,6 @@
     <name>tg-farm-ext</name>
 
     <properties>
-        <properties.searchPath>*/src/main/resources/*.properties</properties.searchPath>
         <PH_daily_trash.version>1.0.0</PH_daily_trash.version>
         <PD_panty_of_destiny.version>1.0.0</PD_panty_of_destiny.version>
     </properties>

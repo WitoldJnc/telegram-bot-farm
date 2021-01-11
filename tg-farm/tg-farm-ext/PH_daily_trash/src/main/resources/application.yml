@@ -1,0 +1,45 @@
+tg:
+  bot:
+    mnemonic: PH_BT
+
+spring:
+  flyway:
+    locations: classpath:db/migration/
+    enabled: false
+    baselineOnMigrate: true
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp:
+          use_jdbc_metadata_defaults: false
+    hibernate:
+      ddl-auto: none
+#      ddl-auto: create
+#      ddl-auto: update
+
+
+ph:
+  tg:
+    api:
+      bot:
+        prod:
+          key: ${TG_BOT_PROD_KEY}
+          name: ${TG_BOT_PROD_NAME:@dev_ph_prod_bot}
+        plus:
+          key: ${TG_BOT_PLUS_KEYA}
+          name: ${TG_BOT_PLUS_NAME}
+      setting:
+        cookie: ${API_BOT_COOKIE}
+        resource: ${API_BOT_RESOURCE}
+        page:
+          count: ${PAGE_COUNT}
+cloud:
+  postgres:
+    instance: tg-farm-postgres
+
+
+
+
